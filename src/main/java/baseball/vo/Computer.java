@@ -24,4 +24,12 @@ public class Computer extends Numbers {
             addValidNumber(numberList, randomNumber);
         }
     }
+
+    @Override
+    boolean isAddable(List<Integer> numberList, int number) {
+        if (numberList.contains(number)) {
+            return false;
+        }
+        return true;
+    }
 }
