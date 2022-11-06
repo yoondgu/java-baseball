@@ -25,6 +25,12 @@ public class GameController {
             hintMessage = gameService.guessNumbers(guessingNumber);
             System.out.println(hintMessage);
         }
+        System.out.println(MESSAGE_PLAYER_WIN);
+        System.out.println(MESSAGE_RESTART_OR_QUIT);
+        String toRestartOrQuitNumber = keyboardReader.readIntegerLine();
+        if (toRestart(Integer.parseInt(toRestartOrQuitNumber))) {
+            runGame();
+        }
     }
 
     private static boolean strikeAll(String hintMessage) {
@@ -32,5 +38,15 @@ public class GameController {
             return true;
         }
         return false;
+    }
+
+    private static boolean toRestart(int number) {
+        if (number == NUMBER_RESTART) {
+            return true;
+        }
+        if (number == NUMBER_QUIT) {
+            return false;
+        }
+        throw new IllegalArgumentException();
     }
 }
