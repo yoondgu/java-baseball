@@ -1,30 +1,29 @@
 package baseball.service;
 
+import baseball.vo.Result;
 import baseball.vo.Computer;
 import baseball.vo.Player;
 
 import java.util.List;
 
 public class GameService {
-    private GameService() {
-        refreshComputerNumbers();
-    }
+    private final Computer computer = Computer.getInstance();
+    private final Player player = Player.getInstance();
+    private List<Integer> computerNumbers;
+
+    private GameService() { }
     private static final GameService instance = new GameService();
     public static GameService getInstance() {
         return instance;
     }
 
-    private final Computer computer = Computer.getInstance();
-    private final Player player = Player.getInstance();
-    private List<Integer> computerNumbers;
-
     public void refreshComputerNumbers() {
         computerNumbers = computer.generateNumberList();
     }
 
-    public boolean guessNumbers(String guessingNumbers) {
+    // TODO playerNumbers가 초기화되지 않았을 때 이 메소드를 사용하지 못하게 하기
+    public String guessNumbers(String guessingNumbers) {
         List<Integer> playerNumbers = player.generateNumberList(guessingNumbers);
-        // TODO 두 수가 맞는지 확인하기
-        return true;
+        return new Result(computerNumbers, playerNumbers).generateHintMessage();
     }
 }
