@@ -1,11 +1,11 @@
 package baseball.utils;
 
-import baseball.messages.InputKeyword;
+import baseball.messages.InputKey;
 import camp.nextstep.edu.missionutils.Console;
 
 public class KeyboardReader {
-    private static final String INPUT_RESTART = InputKeyword.RESTART.keyword();
-    private static final String INPUT_QUIT = InputKeyword.QUIT.keyword();
+    private static final String INPUT_RESTART = InputKey.RESTART.text();
+    private static final String INPUT_QUIT = InputKey.QUIT.text();
 
     private static final String REGEX_INTEGER = "-?\\d+";
 
