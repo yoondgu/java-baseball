@@ -1,5 +1,6 @@
 package baseball.utils;
 
+import baseball.messages.InputKeyword;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.*;
 
@@ -62,14 +63,14 @@ class KeyboardReaderTest extends NsTest {
         @Test
         @DisplayName("키보드 재시작/종료 키워드 받기 : 재시작 키워드를 받은 경우 true를 반환")
         void 키보드_재시작_종료_키워드_받기_재시작() {
-            run("1");
+            run(InputKeyword.RESTART.keyword());
             assertThat((boolean) returnValue).isTrue();
         }
 
         @Test
         @DisplayName("키보드 재시작/종료 키워드 받기 : 종료 키워드를 받은 경우 false를 반환")
         void 키보드_재시작_종료_키워드_받기_종료() {
-            run("2");
+            run(InputKeyword.QUIT.keyword());
             assertThat((boolean) returnValue).isFalse();
         }
 

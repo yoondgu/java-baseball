@@ -1,10 +1,12 @@
 package baseball.utils;
 
+import baseball.messages.InputKeyword;
 import camp.nextstep.edu.missionutils.Console;
 
 public class KeyboardReader {
-    private static final String INPUT_RESTART = "1";
-    private static final String INPUT_QUIT = "2";
+    private static final String INPUT_RESTART = InputKeyword.RESTART.keyword();
+    private static final String INPUT_QUIT = InputKeyword.QUIT.keyword();
+
     private static final String REGEX_INTEGER = "-?\\d+";
 
     private KeyboardReader() { }
