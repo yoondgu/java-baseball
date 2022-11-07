@@ -17,6 +17,10 @@ public class Result {
         initializeResult(playerNumbers);
     }
 
+    public boolean strikeAll() {
+        return strike == computerNumbers.size();
+    }
+
     public String generateHintMessage() {
         if (isNothing) {
             return NOTHING;
@@ -44,7 +48,7 @@ public class Result {
             this.strike++;
             return;
         }
-        if (containsSameNumber(guess, index)) {
+        if (containsSameNumber(guess)) {
             this.ball++;
         }
     }
@@ -53,7 +57,7 @@ public class Result {
         return computerNumbers.get(index) == guess;
     }
 
-    private boolean containsSameNumber(int guess, int index) {
+    private boolean containsSameNumber(int guess) {
         return computerNumbers.contains(guess);
     }
 

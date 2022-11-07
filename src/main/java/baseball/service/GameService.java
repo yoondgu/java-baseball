@@ -22,8 +22,8 @@ public class GameService {
     }
 
     // TODO computerNumbers가 초기화되지 않았을 때 이 메소드를 사용하지 못하게 하기
-    public String guessNumbers(String guessingNumbers) {
+    public Result guessNumbers(String guessingNumbers) {
         List<Integer> playerNumbers = player.generateGameNumberList(guessingNumbers);
-        return new Result(computerNumbers, playerNumbers).generateHintMessage();
+        return new Result(computerNumbers, playerNumbers);
     }
 }
