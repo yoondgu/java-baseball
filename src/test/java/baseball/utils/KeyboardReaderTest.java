@@ -1,56 +1,93 @@
 package baseball.utils;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class KeyboardReaderTest extends NsTest {
     private static final KeyboardReader keyboardReader = KeyboardReader.getInstance();
-    private String inputLine = "";
+    private ReadingType readingType;
+    private Object returnValue;
 
-    @Test
-    @DisplayName("키보드 숫자 입력받기 : 정수값을 입력받은 경우 해당 문자열을 그대로 반환")
-    void 키보드_숫자_입력받기_정수값을_입력받은_경우() {
-        run("1");
-        assertThat(inputLine)
-                .isInstanceOf(String.class)
-                .isNotNull()
-                .isNotEmpty()
-                .isEqualTo("1");
+    interface ReadingType {
+        Object read();
     }
 
-    @Test
-    @DisplayName("키보드 숫자 입력받기 :0으로 시작하는 정수값을 입력받은 경우 해당 문자열을 그대로 반환")
-    void 키보드_숫자_입력받기_0으로_시작하는_정수값을_입력받은_경우() {
-        run("023");
-        assertThat(inputLine)
-                .isInstanceOf(String.class)
-                .isNotNull()
-                .isNotEmpty()
-                .isEqualTo("023");
+    @Nested
+    class ReadOnlyIntegerTest {
+        @BeforeEach
+        void initializeReaderType() {
+            setReadType(keyboardReader::readLineOnlyInteger);
+        }
+
+        @Test
+        @DisplayName("키보드 숫자 입력받기 : 정수값을 입력받은 경우 해당 문자열을 그대로 반환")
+        void 키보드_숫자_입력받기_정수값을_입력받은_경우() {
+            run("1");
+            assertThat(returnValue.toString())
+                    .isNotNull()
+                    .isNotEmpty()
+                    .isEqualTo("1");
+        }
+
+        @Test
+        @DisplayName("키보드 숫자 입력받기 :0으로 시작하는 정수값을 입력받은 경우 해당 문자열을 그대로 반환")
+        void 키보드_숫자_입력받기_0으로_시작하는_정수값을_입력받은_경우() {
+            run("023");
+            assertThat(returnValue.toString())
+                    .isNotNull()
+                    .isNotEmpty()
+                    .isEqualTo("023");
+        }
+
+        @Test
+        @DisplayName("키보드 숫자 입력받기 : 정수가 아닌 값을 입력받은 경우 예외발생")
+        void 키보드_숫자_입력받기_예외테스트() {
+            assertThatThrownBy(() -> run("ABC"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("[오류] 입력값은 정수만 허용됩니다.");
+        }
+
     }
 
-    @Test
-    @DisplayName("키보드 숫자 입력받기 : 정수가 아닌 값을 입력받은 경우 예외발생")
-    void 키보드_숫자_입력받기_정수가_아닌_값을_입력받은_경우_예외발생() {
-        assertThatThrownBy(() -> run("ABC"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[오류] 입력값은 정수만 허용됩니다.");
+    @Nested
+    class ReadWillRestartTest {
+        @BeforeEach
+        void initializeReaderType() {
+            setReadType(keyboardReader::readWillRestart);
+        }
+
+        @Test
+        @DisplayName("키보드 재시작/종료 키워드 받기 : 재시작 키워드를 받은 경우 true를 반환")
+        void 키보드_재시작_종료_키워드_받기_재시작() {
+            run("1");
+            assertThat((boolean) returnValue).isTrue();
+        }
+
+        @Test
+        @DisplayName("키보드 재시작/종료 키워드 받기 : 종료 키워드를 받은 경우 false를 반환")
+        void 키보드_재시작_종료_키워드_받기_종료() {
+            run("2");
+            assertThat((boolean) returnValue).isFalse();
+        }
+
+        @Test
+        @DisplayName("키보드 재시작/종료 키워드 받기 : 부정확한 키워드를 받은 경우 예외발생")
+        void 키보드_재시작_종료_키워드_받기_부정확한_키워드_01_예외발생() {
+            assertThatThrownBy(() -> run("01"))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessageContaining("[오류] 1, 2 외의 키워드를 입력하였습니다.");
+        }
     }
 
-    @Test
-    @DisplayName("키보드 숫자 입력받기 : 수식 형식을 입력받은 경우 예외발생")
-    void 키보드_숫자_입력받기_수식_형식을_입력받은_경우_예외발생() {
-        assertThatThrownBy(() -> run("200-13"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[오류] 입력값은 정수만 허용됩니다.");
+    private void setReadType(ReadingType type) {
+        this.readingType = type;
     }
 
     @Override
     public void runMain() {
-        inputLine = keyboardReader.readLineOnlyInteger();
+        returnValue = readingType.read();
     }
 }
