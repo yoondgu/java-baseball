@@ -1,7 +1,5 @@
-package baseball;
+package baseball.vo;
 
-import baseball.vo.Computer;
-import baseball.vo.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class NumbersTest {
+public class GameNumbersTest {
     @Test
     @DisplayName("컴퓨터숫자 생성 : 랜덤 숫자를 생성하여 리스트에 저장해 반환한다.")
     void 컴퓨터숫자_생성() {
@@ -24,7 +22,7 @@ public class NumbersTest {
     }
 
     @Test
-    @DisplayName("사용자숫자 생성 : 올바른 값을 입력받은 경우 리스트에 저장해 반환한다.")
+    @DisplayName("사용자숫자 생성 : 올바른 값을 입력받은 경우 리스트에 저장해 반환")
     void 사용자숫자_생성_올바른_값을_입력받은_경우() {
         Player player = Player.getInstance();
         List<Integer> guessingNumbers = player.generateNumberList("123");

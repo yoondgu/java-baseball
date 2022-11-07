@@ -2,7 +2,7 @@ package baseball.vo;
 
 import java.util.List;
 
-abstract class Numbers {
+abstract class GameNumbers {
     static final int NUMBER_COUNT = 3;
     static final int START_INCLUSIVE = 1;
     static final int END_INCLUSIVE = 9;

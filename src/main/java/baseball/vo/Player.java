@@ -3,7 +3,7 @@ package baseball.vo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends Numbers {
+public class Player extends GameNumbers {
     private Player() { }
     private static final Player instance = new Player();
     public static Player getInstance() {

@@ -51,6 +51,6 @@ class KeyboardReaderTest extends NsTest {
 
     @Override
     public void runMain() {
-        inputLine = keyboardReader.readIntegerLine();
+        inputLine = keyboardReader.readLineOnlyInteger();
     }
 }

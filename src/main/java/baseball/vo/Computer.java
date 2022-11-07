@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Computer extends Numbers {
+public class Computer extends GameNumbers {
     private Computer() { }
     private static final Computer instance = new Computer();
     public static Computer getInstance() {
