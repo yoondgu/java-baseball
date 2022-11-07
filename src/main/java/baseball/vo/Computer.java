@@ -12,7 +12,7 @@ public class Computer extends GameNumbers {
         return instance;
     }
 
-    public List<Integer> generateNumberList() {
+    public List<Integer> generateGameNumberList() {
         List<Integer> numberList = new ArrayList<>();
         insertRandomUniqueNumbers(numberList);
         return numberList;

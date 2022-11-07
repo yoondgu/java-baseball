@@ -18,12 +18,12 @@ public class GameService {
     }
 
     public void refreshComputerNumbers() {
-        computerNumbers = computer.generateNumberList();
+        computerNumbers = computer.generateGameNumberList();
     }
 
-    // TODO playerNumbers가 초기화되지 않았을 때 이 메소드를 사용하지 못하게 하기
+    // TODO computerNumbers가 초기화되지 않았을 때 이 메소드를 사용하지 못하게 하기
     public String guessNumbers(String guessingNumbers) {
-        List<Integer> playerNumbers = player.generateNumberList(guessingNumbers);
+        List<Integer> playerNumbers = player.generateGameNumberList(guessingNumbers);
         return new Result(computerNumbers, playerNumbers).generateHintMessage();
     }
 }

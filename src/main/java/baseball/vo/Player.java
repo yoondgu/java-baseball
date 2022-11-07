@@ -10,28 +10,24 @@ public class Player extends GameNumbers {
         return instance;
     }
 
-    public List<Integer> generateNumberList(String guessingNumbers) {
-        if (!checkNumberCount(guessingNumbers)) {
-            throw new IllegalArgumentException("[오류] 숫자의 개수는 3개입니다.");
-        }
+    public List<Integer> generateGameNumberList(String guessingNumbers) {
+        checkNumbersCount(guessingNumbers);
         List<Integer> numberList = new ArrayList<>();
         insertGuessingNumbers(numberList, guessingNumbers);
         return numberList;
     }
 
-    private boolean checkNumberCount(String guessingNumbers) {
+    private void checkNumbersCount(String guessingNumbers) {
         if (guessingNumbers.length() != NUMBER_COUNT) {
-            return false;
+            throw new IllegalArgumentException("[오류] 숫자의 개수는 " + NUMBER_COUNT + "개입니다.");
         }
-        return true;
     }
 
     private void insertGuessingNumbers(List<Integer> numberList, String guessingNumbers) {
         int index = 0;
         while (numberList.size() < NUMBER_COUNT) {
             String guessingNumber = guessingNumbers.substring(index, index+1);
-            int value = Integer.parseInt(guessingNumber);
-            addValidNumber(numberList, value);
+            addValidNumber(numberList, Integer.parseInt(guessingNumber));
             index++;
         }
     }
