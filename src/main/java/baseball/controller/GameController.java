@@ -4,8 +4,8 @@ import baseball.service.GameService;
 import baseball.utils.KeyboardReader;
 
 public class GameController {
-    private static final int INPUT_RESTART = 1;
-    private static final int INPUT_QUIT = 2;
+    private static final String INPUT_RESTART = "1";
+    private static final String INPUT_QUIT = "2";
 
     private static final String MESSAGE_GUESS_COMPUTER_NUMBERS = "숫자를 입력해주세요 : ";
     private static final String MESSAGE_STRIKE_ALL = "3스트라이크";
@@ -29,8 +29,8 @@ public class GameController {
 
         System.out.println(MESSAGE_PLAYER_WIN);
         System.out.println(MESSAGE_RESTART_OR_QUIT);
-        String toRestartOrQuitInput = keyboardReader.readLineOnlyInteger();
-        if (toRestart(Integer.parseInt(toRestartOrQuitInput))) {
+        boolean willRestart = keyboardReader.readWillRestart();
+        if (willRestart) {
             runGame();
         }
     }
@@ -40,15 +40,5 @@ public class GameController {
             return true;
         }
         return false;
-    }
-
-    private static boolean toRestart(int toRestartOrQuitInput) {
-        if (toRestartOrQuitInput == INPUT_RESTART) {
-            return true;
-        }
-        if (toRestartOrQuitInput == INPUT_QUIT) {
-            return false;
-        }
-        throw new IllegalArgumentException();
     }
 }
