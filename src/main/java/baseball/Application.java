@@ -2,16 +2,16 @@ package baseball;
 
 import baseball.controller.GameController;
 import baseball.messages.OutputMessage;
+import baseball.utils.MessagePrinter;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println(OutputMessage.RUN_APPLICATION.message());
+        MessagePrinter.printLine(OutputMessage.RUN_APPLICATION);
         try {
             GameController.runGame();
         } catch (IllegalArgumentException e) {
-            System.out.println();
-            System.out.println(e.getMessage());
-            System.out.println(OutputMessage.EXIT_BY_ERROR.message());
+            MessagePrinter.printLine("\n" + e.getMessage());
+            MessagePrinter.printLine(OutputMessage.EXIT_BY_ERROR);
             throw new IllegalArgumentException();
         }
     }
