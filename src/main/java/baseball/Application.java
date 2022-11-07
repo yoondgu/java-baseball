@@ -9,10 +9,11 @@ public class Application {
         MessagePrinter.printLine(OutputMessage.RUN_APPLICATION);
         try {
             GameController.runGame();
-        } catch (IllegalArgumentException e) {
-            MessagePrinter.printLine("\n" + e.getMessage());
-            MessagePrinter.printLine(OutputMessage.EXIT_BY_ERROR);
+        } catch (IllegalArgumentException exception) {
+            GameController.informExitByError(exception);
             throw new IllegalArgumentException();
+        } catch (Exception exception) {
+            GameController.informExitByError(exception);
         }
     }
 }
