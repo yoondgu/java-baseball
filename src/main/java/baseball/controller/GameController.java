@@ -1,5 +1,6 @@
 package baseball.controller;
 
+import baseball.utils.resources.InputKey;
 import baseball.utils.resources.OutputMessage;
 import baseball.service.GameService;
 import baseball.utils.KeyboardReader;
@@ -36,7 +37,7 @@ public class GameController {
     private static void selectRestartOrQuit() throws IllegalArgumentException {
         MessagePrinter.printLine(OutputMessage.PLAYER_WIN);
         MessagePrinter.printLine(OutputMessage.RESTART_OR_QUIT);
-        if (KeyboardReader.readWillRestart()) {
+        if (KeyboardReader.readLineAsBooleanKey(InputKey.RESTART, InputKey.QUIT)) {
             runGame();
         }
     }

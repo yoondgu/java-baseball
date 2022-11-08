@@ -16,6 +16,7 @@ class KeyboardReaderTest extends NsTest {
     }
 
     @Nested
+    @DisplayName("키보드로 정수로 이루어진 문자열만 입력받기 테스트")
     class ReadOnlyIntegerTest {
         @BeforeEach
         void initializeReaderType() {
@@ -53,32 +54,33 @@ class KeyboardReaderTest extends NsTest {
     }
 
     @Nested
-    class ReadWillRestartTest {
+    @DisplayName("키보드로 결정키워드 재시작/종료 입력받기 테스트")
+    class ReadLineAsBooleanKeyTest {
         @BeforeEach
         void initializeReaderType() {
-            setReadType(KeyboardReader::readWillRestart);
+            setReadType(() -> KeyboardReader.readLineAsBooleanKey(InputKey.RESTART, InputKey.QUIT));
         }
 
         @Test
-        @DisplayName("키보드 재시작/종료 키워드 받기 : 재시작 키워드를 받은 경우 true를 반환")
-        void 키보드_재시작_종료_키워드_받기_재시작() {
+        @DisplayName("재시작/종료 키워드 입력받기 : 재시작 키워드를 받은 경우 true를 반환")
+        void 키보드_결정_키워드_받기_재시작() {
             run(InputKey.RESTART.text());
             assertThat((boolean) returnValue).isTrue();
         }
 
         @Test
-        @DisplayName("키보드 재시작/종료 키워드 받기 : 종료 키워드를 받은 경우 false를 반환")
-        void 키보드_재시작_종료_키워드_받기_종료() {
+        @DisplayName("재시작/종료 키워드 입력받기 : 종료 키워드를 받은 경우 false를 반환")
+        void 키보드_결정_키워드_받기_종료() {
             run(InputKey.QUIT.text());
             assertThat((boolean) returnValue).isFalse();
         }
 
         @Test
-        @DisplayName("키보드 재시작/종료 키워드 받기 : 부정확한 키워드를 받은 경우 예외발생")
+        @DisplayName("재시작/종료 키워드 입력받기 : 부정확한 키워드를 받은 경우 예외발생")
         void 키보드_재시작_종료_키워드_받기_부정확한_키워드_01_예외발생() {
             assertThatThrownBy(() -> run("01"))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("[오류] 1, 2 외의 키워드를 입력하였습니다.");
+                    .hasMessageContaining("[오류] 잘못된 키워드를 입력하였습니다.");
         }
     }
 

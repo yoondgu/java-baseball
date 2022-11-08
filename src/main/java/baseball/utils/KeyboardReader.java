@@ -4,22 +4,19 @@ import baseball.utils.resources.InputKey;
 import camp.nextstep.edu.missionutils.Console;
 
 public class KeyboardReader {
-    private static final String INPUT_RESTART = InputKey.RESTART.text();
-    private static final String INPUT_QUIT = InputKey.QUIT.text();
-
     private static final String REGEX_INTEGER = "-?\\d+";
 
     private KeyboardReader() { }
 
-    public static boolean readWillRestart() {
+    public static boolean readLineAsBooleanKey(InputKey trueKey, InputKey falseKey) {
         String inputLine = readLineForAll();
-        if (INPUT_RESTART.equals(inputLine)) {
+        if (inputLine.equals(trueKey.text())) {
             return true;
         }
-        if (INPUT_QUIT.equals(inputLine)) {
+        if (inputLine.equals(falseKey.text())) {
             return false;
         }
-        throw new IllegalArgumentException("[오류] 1, 2 외의 키워드를 입력하였습니다.");
+        throw new IllegalArgumentException("[오류] 잘못된 키워드를 입력하였습니다.");
     }
 
     public static String readLineOnlyInteger() {
