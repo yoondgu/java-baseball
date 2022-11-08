@@ -1,4 +1,4 @@
-package baseball.messages;
+package baseball.utils.resources;
 
 public enum InputKey {
     RESTART("1"),

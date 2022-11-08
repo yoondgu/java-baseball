@@ -1,8 +1,10 @@
 package baseball.utils;
 
-import baseball.messages.OutputMessage;
+import baseball.utils.resources.OutputMessage;
 
 public class MessagePrinter {
+    private MessagePrinter() { }
+
     public static void print(OutputMessage content) {
         System.out.print(content.text());
     }

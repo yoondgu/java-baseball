@@ -1,6 +1,6 @@
 package baseball.utils;
 
-import baseball.messages.InputKey;
+import baseball.utils.resources.InputKey;
 import camp.nextstep.edu.missionutils.Console;
 
 public class KeyboardReader {
@@ -10,12 +10,8 @@ public class KeyboardReader {
     private static final String REGEX_INTEGER = "-?\\d+";
 
     private KeyboardReader() { }
-    private static final KeyboardReader instance = new KeyboardReader();
-    public static KeyboardReader getInstance() {
-        return instance;
-    }
 
-    public boolean readWillRestart() {
+    public static boolean readWillRestart() {
         String inputLine = readLineForAll();
         if (INPUT_RESTART.equals(inputLine)) {
             return true;
@@ -26,7 +22,7 @@ public class KeyboardReader {
         throw new IllegalArgumentException("[오류] 1, 2 외의 키워드를 입력하였습니다.");
     }
 
-    public String readLineOnlyInteger() {
+    public static String readLineOnlyInteger() {
         String inputLine = readLineForAll();
         if (!inputLine.matches(REGEX_INTEGER)) {
             throw new IllegalArgumentException("[오류] 입력값은 정수만 허용됩니다.");
@@ -34,7 +30,7 @@ public class KeyboardReader {
         return inputLine;
     }
 
-    private String readLineForAll() {
+    private static String readLineForAll() {
         return Console.readLine();
     }
 }

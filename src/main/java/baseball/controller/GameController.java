@@ -1,13 +1,12 @@
 package baseball.controller;
 
-import baseball.messages.OutputMessage;
+import baseball.utils.resources.OutputMessage;
 import baseball.service.GameService;
 import baseball.utils.KeyboardReader;
 import baseball.utils.MessagePrinter;
 import baseball.vo.Result;
 
 public class GameController {
-    private static final KeyboardReader keyboardReader = KeyboardReader.getInstance();
     private static final GameService gameService = GameService.getInstance();
 
     public static void runGame() throws IllegalArgumentException {
@@ -27,7 +26,7 @@ public class GameController {
         boolean strikeAll = false;
         while (!strikeAll) {
             MessagePrinter.print(OutputMessage.GUESS_COMPUTER_NUMBERS);
-            String guessingInput = keyboardReader.readLineOnlyInteger();
+            String guessingInput = KeyboardReader.readLineOnlyInteger();
             Result guessResult = gameService.guessNumbers(guessingInput);
             MessagePrinter.printLine(guessResult.generateHintMessage());
             strikeAll = guessResult.strikeAll();
@@ -37,7 +36,7 @@ public class GameController {
     private static void selectRestartOrQuit() throws IllegalArgumentException {
         MessagePrinter.printLine(OutputMessage.PLAYER_WIN);
         MessagePrinter.printLine(OutputMessage.RESTART_OR_QUIT);
-        if (keyboardReader.readWillRestart()) {
+        if (KeyboardReader.readWillRestart()) {
             runGame();
         }
     }

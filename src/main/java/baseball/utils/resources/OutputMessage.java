@@ -1,4 +1,4 @@
-package baseball.messages;
+package baseball.utils.resources;
 
 public enum OutputMessage {
     RUN_APPLICATION("숫자 야구 게임을 시작합니다."),

@@ -1,6 +1,6 @@
 package baseball.utils;
 
-import baseball.messages.InputKey;
+import baseball.utils.resources.InputKey;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.*;
 
@@ -8,7 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class KeyboardReaderTest extends NsTest {
-    private static final KeyboardReader keyboardReader = KeyboardReader.getInstance();
     private ReadingType readingType;
     private Object returnValue;
 
@@ -20,7 +19,7 @@ class KeyboardReaderTest extends NsTest {
     class ReadOnlyIntegerTest {
         @BeforeEach
         void initializeReaderType() {
-            setReadType(keyboardReader::readLineOnlyInteger);
+            setReadType(KeyboardReader::readLineOnlyInteger);
         }
 
         @Test
@@ -57,7 +56,7 @@ class KeyboardReaderTest extends NsTest {
     class ReadWillRestartTest {
         @BeforeEach
         void initializeReaderType() {
-            setReadType(keyboardReader::readWillRestart);
+            setReadType(KeyboardReader::readWillRestart);
         }
 
         @Test
