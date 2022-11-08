@@ -1,14 +1,12 @@
 package baseball.controller;
 
-import baseball.utils.resources.InputKey;
-import baseball.utils.resources.OutputMessage;
 import baseball.service.GameService;
-import baseball.utils.KeyboardReader;
-import baseball.utils.MessagePrinter;
+import baseball.view.GameView;
 import baseball.vo.Result;
 
 public class GameController {
     private static final GameService gameService = GameService.getInstance();
+    private static final GameView gameView = GameView.getInstance();
 
     public static void runGame() throws IllegalArgumentException {
         gameService.refreshComputerNumbers();
@@ -17,27 +15,21 @@ public class GameController {
     }
 
     public static void informExitByError(Exception exception) {
-        if (exception.getMessage() != null) {
-            MessagePrinter.printLine("\n" + exception.getMessage());
-        }
-        MessagePrinter.printLine(OutputMessage.EXIT_BY_ERROR);
+        gameView.showExitMessageByError(exception);
     }
 
     private static void repeatUntilPlayerWin() throws IllegalArgumentException {
         boolean strikeAll = false;
         while (!strikeAll) {
-            MessagePrinter.print(OutputMessage.GUESS_COMPUTER_NUMBERS);
-            String guessingInput = KeyboardReader.readLineOnlyInteger();
+            String guessingInput = gameView.askGuessingNumbers();
             Result guessResult = gameService.guessNumbers(guessingInput);
-            MessagePrinter.printLine(guessResult.generateHintMessage());
+            gameView.showHintByResult(guessResult);
             strikeAll = guessResult.strikeAll();
         }
     }
 
     private static void selectRestartOrQuit() throws IllegalArgumentException {
-        MessagePrinter.printLine(OutputMessage.PLAYER_WIN);
-        MessagePrinter.printLine(OutputMessage.RESTART_OR_QUIT);
-        if (KeyboardReader.readLineAsBooleanKey(InputKey.RESTART, InputKey.QUIT)) {
+        if (gameView.askRestartGame()) {
             runGame();
         }
     }
