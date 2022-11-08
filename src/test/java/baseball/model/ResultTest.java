@@ -1,11 +1,11 @@
-package baseball.vo;
+package baseball.model;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultTest {
     private final List<Integer> computerNumbers = List.of(1, 3, 5);
@@ -26,7 +26,7 @@ class ResultTest {
 
     @Test
     @DisplayName("사용자 숫자에 따른 힌트 생성 : 볼, 스트라이크가 여러 개일 경우 n볼 n스트라이크")
-    void 힌트메시지_생성_1볼_2스트라이크() {
+    void 힌트메시지_생성_2볼_1스트라이크() {
         Result result = new Result(computerNumbers, List.of(5, 3, 1));
         assertThat(result.generateHintMessage()).isEqualTo("2볼 1스트라이크");
     }

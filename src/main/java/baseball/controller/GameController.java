@@ -2,7 +2,7 @@ package baseball.controller;
 
 import baseball.service.GameService;
 import baseball.view.GameView;
-import baseball.vo.Result;
+import baseball.model.Result;
 
 public class GameController {
     private static final GameService gameService = GameService.getInstance();

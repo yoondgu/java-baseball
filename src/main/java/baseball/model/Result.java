@@ -1,4 +1,4 @@
-package baseball.vo;
+package baseball.model;
 
 import java.util.List;
 
@@ -35,7 +35,6 @@ public class Result {
     }
 
     private void initializeResult(List<Integer> playerNumbers) {
-        // TODO stream 활용할지 검토할 것
         for (int index = 0; index < playerNumbers.size(); index++) {
             int guessNumber = playerNumbers.get(index);
             countStrikeOrBall(guessNumber, index);

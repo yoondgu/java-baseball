@@ -4,7 +4,7 @@ import baseball.utils.KeyboardReader;
 import baseball.utils.MessagePrinter;
 import baseball.utils.resources.InputKey;
 import baseball.utils.resources.OutputMessage;
-import baseball.vo.Result;
+import baseball.model.Result;
 
 public class GameView {
     private GameView() { }
@@ -20,7 +20,7 @@ public class GameView {
         MessagePrinter.printLine(OutputMessage.EXIT_BY_ERROR);
     }
 
-    public String askGuessingNumbers() {
+    public String askGuessingNumbers() throws IllegalArgumentException {
         MessagePrinter.print(OutputMessage.GUESS_COMPUTER_NUMBERS);
         return KeyboardReader.readLineOnlyInteger();
     }
@@ -29,7 +29,7 @@ public class GameView {
         MessagePrinter.printLine(guessResult.generateHintMessage());
     }
 
-    public boolean askRestartGame() {
+    public boolean askRestartGame() throws IllegalArgumentException {
         MessagePrinter.printLine(OutputMessage.PLAYER_WIN);
         MessagePrinter.printLine(OutputMessage.RESTART_OR_QUIT);
         return KeyboardReader.readLineAsBooleanKey(InputKey.RESTART, InputKey.QUIT);

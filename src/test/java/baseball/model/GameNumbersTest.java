@@ -1,20 +1,20 @@
-package baseball.vo;
+package baseball.model;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class GameNumbersTest {
     private final Computer computer = Computer.getInstance();
     private final Player player = Player.getInstance();
 
     @Test
-    @DisplayName("컴퓨터숫자 생성 : 랜덤 숫자를 생성하여 리스트에 저장해 반환한다.")
+    @DisplayName("컴퓨터숫자 생성 : 랜덤 숫자를 생성하여 리스트에 저장해 반환")
     void 컴퓨터숫자_생성() {
         List<Integer> computerNumbers = computer.generateGameNumberList();
         assertThat(computerNumbers)

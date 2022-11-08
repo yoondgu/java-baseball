@@ -1,11 +1,16 @@
 package baseball.utils;
 
-import baseball.utils.resources.InputKey;
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.*;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import baseball.utils.resources.InputKey;
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+;
 
 class KeyboardReaderTest extends NsTest {
     private ReadingType readingType;
