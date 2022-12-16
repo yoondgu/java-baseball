@@ -1,6 +1,6 @@
 package baseball.model;
 
-import static baseball.model.domain.NumberRule.*;
+import static baseball.model.domain.BaseballNumberRule.*;
 
 import camp.nextstep.edu.missionutils.Randoms;
 

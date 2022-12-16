@@ -3,11 +3,11 @@ package baseball.model.domain;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Numbers {
+public class BaseballNumbers {
     private final List<Integer> numbers;
 
-    public Numbers(List<Integer> numbers) {
-        NumberValidator.validate(numbers);
+    public BaseballNumbers(List<Integer> numbers) {
+        BaseballNumberValidator.validate(numbers);
         this.numbers = numbers;
     }
 
@@ -20,23 +20,23 @@ public class Numbers {
         return numbers.contains(number);
     }
 
-    public int countStrike(Numbers other) {
+    public int countStrike(BaseballNumbers other) {
         return (int) IntStream.range(0, numbers.size())
                 .filter(index -> isStrike(index, other))
                 .count();
     }
 
-    public int countBall(Numbers other) {
+    public int countBall(BaseballNumbers other) {
         return (int) IntStream.range(0, numbers.size())
                 .filter(index -> isBall(index, other))
                 .count();
     }
 
-    private boolean isStrike(int index, Numbers other) {
+    private boolean isStrike(int index, BaseballNumbers other) {
         return numbers.get(index) == other.findNumberByIndex(index);
     }
 
-    private boolean isBall(int index, Numbers other) {
+    private boolean isBall(int index, BaseballNumbers other) {
         return !isStrike(index, other) && other.contains(numbers.get(index));
     }
 

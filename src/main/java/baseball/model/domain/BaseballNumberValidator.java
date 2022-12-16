@@ -1,12 +1,12 @@
 package baseball.model.domain;
 
-import static baseball.model.domain.NumberRule.*;
+import static baseball.model.domain.BaseballNumberRule.*;
 
 import baseball.model.constant.ErrorMessage;
 
 import java.util.List;
 
-public class NumberValidator {
+public class BaseballNumberValidator {
     public static void validate(List<Integer> numbers) {
         if (numbers.size() != COUNT) {
             throw new IllegalArgumentException(ErrorMessage.NUMBERS_INVALID_COUNT);

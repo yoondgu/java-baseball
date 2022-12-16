@@ -1,27 +1,27 @@
 package baseball.model;
 
 import baseball.model.domain.Match;
-import baseball.model.domain.NumberRule;
-import baseball.model.domain.Numbers;
+import baseball.model.domain.BaseballNumberRule;
+import baseball.model.domain.BaseballNumbers;
 import baseball.model.domain.ResultDTO;
 
 import java.util.List;
 
 public class BaseballGame {
-    private final Numbers computer;
+    private final BaseballNumbers computer;
 
     public BaseballGame(NumberGenerator numberGenerator) {
-        this.computer = new Numbers(numberGenerator.generate());
+        this.computer = new BaseballNumbers(numberGenerator.generate());
     }
 
     public ResultDTO matchNumbers(List<Integer> playerNumbers) {
-        Numbers player = new Numbers(playerNumbers);
+        BaseballNumbers player = new BaseballNumbers(playerNumbers);
         int strikeCount = Match.STRIKE.count(computer, player);
         int ballCount = Match.BALL.count(computer, player);
         return new ResultDTO(strikeCount, ballCount, hasPlayerWin(strikeCount));
     }
 
     private boolean hasPlayerWin(int strikeCount) {
-        return strikeCount == NumberRule.COUNT;
+        return strikeCount == BaseballNumberRule.COUNT;
     }
 }
