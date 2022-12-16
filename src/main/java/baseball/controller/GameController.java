@@ -14,8 +14,8 @@ public class GameController {
     public void run() {
         outputView.printInformStart();
         // TODO 게임 실행 (컴퓨터 숫자 생성)
+        baseballGame.start();
         List<Integer> playerNumbers = inputView.inputPlayerNumbers();
-        System.out.println(playerNumbers);
         // TODO 결과 출력
         // TODO 재시작 여부 입력
     }
