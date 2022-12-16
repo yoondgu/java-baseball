@@ -15,24 +15,28 @@ public class GameController {
 
     public void run() {
         outputView.printInformStart();
-        List<Integer> playerNumbers = inputView.inputPlayerNumbers();
         play();
     }
 
     private void play() {
         baseballGame = new BaseballGame(new BaseballNumberGenerator());
-        boolean willRepeat = true;
-        while (willRepeat) {
-            willRepeat = !playOneRound();
-        }
+        repeatRound();
         outputView.printInformEnd();
-        // TODO 재시작 여부 입력
+        restartOrQuit();
     }
 
-    private boolean playOneRound() {
+    private void restartOrQuit() {
+        if (inputView.inputWillRestart()) {
+            play();
+        }
+    }
+
+    private void repeatRound() {
         List<Integer> playerNumbers = inputView.inputPlayerNumbers();
         ResultDTO result = baseballGame.matchNumbers(playerNumbers);
         outputView.printResult(result);
-        return result.hasPlayerWin();
+        if (!result.hasPlayerWin()) {
+            repeatRound();
+        }
     }
 }
