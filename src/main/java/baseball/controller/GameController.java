@@ -9,24 +9,24 @@ import baseball.view.OutputView;
 import java.util.List;
 
 public class GameController {
-    private final BaseballGame baseballGame = new BaseballGame(new BaseballNumberGenerator());
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
+    private BaseballGame baseballGame;
 
     public void run() {
         outputView.printInformStart();
         List<Integer> playerNumbers = inputView.inputPlayerNumbers();
-        ResultDTO result = baseballGame.matchNumbers(playerNumbers);
-        outputView.printResult(result);
         play();
-        // TODO 재시작 여부 입력
     }
 
     private void play() {
+        baseballGame = new BaseballGame(new BaseballNumberGenerator());
         boolean willRepeat = true;
         while (willRepeat) {
             willRepeat = !playOneRound();
         }
+        outputView.printInformEnd();
+        // TODO 재시작 여부 입력
     }
 
     private boolean playOneRound() {
