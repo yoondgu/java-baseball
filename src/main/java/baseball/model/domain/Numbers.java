@@ -1,14 +1,12 @@
 package baseball.model.domain;
 
+import static baseball.model.domain.NumberRule.*;
+
 import baseball.model.constant.ErrorMessage;
 
 import java.util.List;
 
 public class Numbers {
-    private static final int MIN_VALUE = 1;
-    private static final int MAX_VALUE = 9;
-    private static final int COUNT = 3;
-
     private final List<Integer> numbers;
 
     public Numbers(List<Integer> numbers) {
@@ -27,6 +25,13 @@ public class Numbers {
 
     private boolean hasInvalidRangeNumber(List<Integer> numbers) {
         return numbers.stream()
-                .anyMatch(number -> (number < MIN_VALUE || number > MAX_VALUE));
+                .anyMatch(number -> (number < MINIMUM_VALUE || number > MAXIMUM_VALUE));
+    }
+
+    @Override
+    public String toString() {
+        return "Numbers{" +
+                "numbers=" + numbers +
+                '}';
     }
 }
