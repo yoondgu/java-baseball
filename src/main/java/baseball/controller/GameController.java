@@ -14,8 +14,8 @@ public class GameController {
 
     public void run() {
         outputView.printInformStart();
-        baseballGame.start();
         List<Integer> playerNumbers = inputView.inputPlayerNumbers();
+        baseballGame.matchNumbers(playerNumbers);
         // TODO 결과 출력
         // TODO 재시작 여부 입력
     }
