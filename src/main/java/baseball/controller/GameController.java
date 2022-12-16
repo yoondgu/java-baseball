@@ -18,7 +18,21 @@ public class GameController {
         List<Integer> playerNumbers = inputView.inputPlayerNumbers();
         ResultDTO result = baseballGame.matchNumbers(playerNumbers);
         outputView.printResult(result);
-        // TODO hasPlayerWin = true가 아니면 다시 반복
+        play();
         // TODO 재시작 여부 입력
+    }
+
+    private void play() {
+        boolean willRepeat = true;
+        while (willRepeat) {
+            willRepeat = !playOneRound();
+        }
+    }
+
+    private boolean playOneRound() {
+        List<Integer> playerNumbers = inputView.inputPlayerNumbers();
+        ResultDTO result = baseballGame.matchNumbers(playerNumbers);
+        outputView.printResult(result);
+        return result.hasPlayerWin();
     }
 }
