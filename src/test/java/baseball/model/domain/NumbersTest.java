@@ -20,4 +20,16 @@ class NumbersTest {
         assertThatThrownBy(() -> new Numbers(List.of(1,2,3,9)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 매치결과_스트라이크_계산() {
+        assertThat(new Numbers(List.of(1,2,3)).countStrike(new Numbers(List.of(1,2,3)))).isEqualTo(3);
+        assertThat(new Numbers(List.of(1,4,3)).countStrike(new Numbers(List.of(1,2,3)))).isEqualTo(2);
+    }
+
+    @Test
+    void 매치결과_볼_계산() {
+        assertThat(new Numbers(List.of(1,2,3)).countBall(new Numbers(List.of(1,2,3)))).isEqualTo(0);
+        assertThat(new Numbers(List.of(3,4,1)).countBall(new Numbers(List.of(1,2,3)))).isEqualTo(2);
+    }
 }
