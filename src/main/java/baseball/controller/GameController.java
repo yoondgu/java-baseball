@@ -17,8 +17,7 @@ public class GameController {
         outputView.printInformStart();
         List<Integer> playerNumbers = inputView.inputPlayerNumbers();
         ResultDTO result = baseballGame.matchNumbers(playerNumbers);
-        // TODO 결과 출력
-//        outputView.printResult(result);
+        outputView.printResult(result);
         // TODO hasPlayerWin = true가 아니면 다시 반복
         // TODO 재시작 여부 입력
     }
