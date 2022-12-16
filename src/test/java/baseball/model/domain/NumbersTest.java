@@ -22,6 +22,12 @@ class NumbersTest {
     }
 
     @Test
+    void 숫자생성_중복_예외발생() {
+        assertThatThrownBy(() -> new Numbers(List.of(1,2,2)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void 매치결과_스트라이크_계산() {
         assertThat(new Numbers(List.of(1,2,3)).countStrike(new Numbers(List.of(1,2,3)))).isEqualTo(3);
         assertThat(new Numbers(List.of(1,4,3)).countStrike(new Numbers(List.of(1,2,3)))).isEqualTo(2);
