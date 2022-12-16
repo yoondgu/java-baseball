@@ -1,12 +1,11 @@
 package baseball.controller;
 
+import baseball.controller.util.ExceptionHandler;
 import baseball.model.BaseballGame;
 import baseball.model.BaseballNumberGenerator;
 import baseball.model.domain.ResultDTO;
 import baseball.view.InputView;
 import baseball.view.OutputView;
-
-import java.util.List;
 
 public class GameController {
     private final InputView inputView = new InputView();
@@ -32,8 +31,7 @@ public class GameController {
     }
 
     private void repeatRound() {
-        List<Integer> playerNumbers = inputView.inputPlayerNumbers();
-        ResultDTO result = baseballGame.matchNumbers(playerNumbers);
+        ResultDTO result = ExceptionHandler.retryForIllegalArgument(baseballGame::matchNumbers, inputView::inputPlayerNumbers, outputView::printError);
         outputView.printResult(result);
         if (!result.hasPlayerWin()) {
             repeatRound();

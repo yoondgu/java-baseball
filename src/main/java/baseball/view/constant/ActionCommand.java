@@ -24,6 +24,10 @@ public enum ActionCommand {
                 });
     }
 
+    public String getKey() {
+        return key;
+    }
+
     public boolean isYes() {
         return isYes;
     }
